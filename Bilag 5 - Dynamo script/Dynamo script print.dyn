@@ -1,0 +1,576 @@
+{
+  "Uuid": "dac9d2b9-205e-499c-b8e9-29b8426d336b",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "Dynamo script print",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "d2242065-8e76-4bf6-ab0d-9cf942ba194f",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "3324fb844407478fb9a56569414f2aea",
+      "Inputs": [
+        {
+          "Id": "4b47134e4b9e490fbcb55b8162940ad6",
+          "Name": "_views",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d12c5c485b904f0babedffcf78a515d2",
+          "Name": "_printRange",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0e90a40bce5a4785b1aa0a4685eebdff",
+          "Name": "_combinedFile",
+          "Description": "bool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0af78833cf6e461a865287f78abf7496",
+          "Name": "_printerName",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "331dbf57ded2447eb6e60f75e3ca30be",
+          "Name": "_printSettings",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ae17d306cca342998cc3f4645e8519b4",
+          "Name": "_filePath",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "13b7a26a433745adbabc4f7d43a9a478",
+          "Name": "_runIt",
+          "Description": "bool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ccd28588b6b74c70ac698c5d4f5a232e",
+          "Name": "_out",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "This node will allow you to initiate a printing routine in revit from a set of views/sheets, printer name, print settings and print range. "
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Microsoft Print to PDF",
+      "Id": "feee35ceacaf41e29682b3d04adc6076",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "df01f6527ef4426f950db12295e7d899",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "archilabUI.ViewSetUi, archilabUI2021",
+      "SelectedIndex": -1,
+      "SelectedString": "",
+      "NodeType": "ExtensionNode",
+      "Id": "97e97248a8d14089bf8b49a4939b5977",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4d4893c4c8a44b0aa1adf481264a0e9e",
+          "Name": "viewSet",
+          "Description": "The selected viewSet",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Retrieve all available View Sets from Revit project."
+    },
+    {
+      "ConcreteType": "archilabUI.PrintRangeUi, archilabUI2021",
+      "SelectedIndex": 1,
+      "SelectedString": "Select",
+      "NodeType": "ExtensionNode",
+      "Id": "91ad653a4eaa49a7b75b924f1605b4f4",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "bf91e672df5a4c87955ceeeedfcbf8d5",
+          "Name": "printRange",
+          "Description": "The selected printRange",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Retrieve all available Print Ranges from Revit project."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\ndataEnteringNode = IN\r\n\r\nx=IN[0]\r\n\r\nif x=='Tømrer': \r\n\tx=\"True\"\r\nelse:\r\n\tx=\"False\"\r\nOUT = x",
+      "VariableInputPorts": true,
+      "Id": "a216e61409fc470391094684199b1ff4",
+      "Inputs": [
+        {
+          "Id": "9fe346b6f993420d8361bc2a4eea274e",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b27d448409c1411cbfba113c3bdd3075",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "f9c36d0a581646e4a4573741db045479",
+      "Inputs": [
+        {
+          "Id": "f58e4c17475b44209ac5003d68a73120",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7722221bd6a14fe5b66c933366ae2776",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "D:\\Sharepoint\\Aalborg Universitet\\Gruppe - 1.317 - 3. semester 1.317\\Semesterprojekt\\Rapport\\Scripts\\Byggeprojekt\\K02 - Contractor (Tømrer)\\Tømrer.pdf",
+      "InputValue": "Byggeprojekt\\K02 - Contractor (Tømrer)\\Tømrer.pdf",
+      "NodeType": "ExtensionNode",
+      "Id": "a6f7598d181a4bb2b3ac0f8e275bf545",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "73536fc85ce349ec8b7799e07eb46ed9",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its filename"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "503fb0aaf8524a09b76f5555472e012a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ef5fc00ea61744ed8358f38cba79eddf",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Tømrer\";",
+      "Id": "b5b1eb04176c4d2da9a48143b14efbe3",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "c88ff176f0394f9c8ee0ccc41b444302",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "archilabUI.PrintSettingUi, archilabUI2021",
+      "SelectedIndex": 0,
+      "SelectedString": "Default",
+      "NodeType": "ExtensionNode",
+      "Id": "e891c415319e4d52a71ba6831110dd5e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "06b24b3fd29545eb810581c9160cd118",
+          "Name": "printSetting",
+          "Description": "The selected printSetting",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Retrieve all available Print Settings from Revit project."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "1b030aad-be1b-4fd5-86db-ea4e08e77121",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "ea7bde7c8f8a478ab83ff505f972e103",
+      "Inputs": [
+        {
+          "Id": "c76927e5c72040a0b71ad1927deef29a",
+          "Name": "viewsSheetSet",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5d3156af8e624d8bb56b906385426810",
+          "Name": "views",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Retrieves all the views/sheets in a given view/sheet set."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "df01f6527ef4426f950db12295e7d899",
+      "End": "0af78833cf6e461a865287f78abf7496",
+      "Id": "826d3133801c45a482227ed82a552d12"
+    },
+    {
+      "Start": "4d4893c4c8a44b0aa1adf481264a0e9e",
+      "End": "c76927e5c72040a0b71ad1927deef29a",
+      "Id": "f47161df32ad4efca8c123b261bd92c8"
+    },
+    {
+      "Start": "bf91e672df5a4c87955ceeeedfcbf8d5",
+      "End": "d12c5c485b904f0babedffcf78a515d2",
+      "Id": "3168d8018d734a229288bf3bb2dab7dd"
+    },
+    {
+      "Start": "b27d448409c1411cbfba113c3bdd3075",
+      "End": "f58e4c17475b44209ac5003d68a73120",
+      "Id": "740acbcc1c21474bb1420e9b9101837d"
+    },
+    {
+      "Start": "7722221bd6a14fe5b66c933366ae2776",
+      "End": "13b7a26a433745adbabc4f7d43a9a478",
+      "Id": "420b9e1f28fb48928efff2177ad5f20a"
+    },
+    {
+      "Start": "73536fc85ce349ec8b7799e07eb46ed9",
+      "End": "ae17d306cca342998cc3f4645e8519b4",
+      "Id": "efc385cfbde34f5db2ffd3477c38e9d5"
+    },
+    {
+      "Start": "ef5fc00ea61744ed8358f38cba79eddf",
+      "End": "0e90a40bce5a4785b1aa0a4685eebdff",
+      "Id": "8ba05cec86b541b8a011bc073f20b56f"
+    },
+    {
+      "Start": "c88ff176f0394f9c8ee0ccc41b444302",
+      "End": "9fe346b6f993420d8361bc2a4eea274e",
+      "Id": "fdf2b10237f34519a9e15d657a001da0"
+    },
+    {
+      "Start": "06b24b3fd29545eb810581c9160cd118",
+      "End": "331dbf57ded2447eb6e60f75e3ca30be",
+      "Id": "b42956df7dfa469ea700256d6484f3ed"
+    },
+    {
+      "Start": "5d3156af8e624d8bb56b906385426810",
+      "End": "4b47134e4b9e490fbcb55b8162940ad6",
+      "Id": "9bda7e4562be46f0930c39c1ebf24476"
+    }
+  ],
+  "Dependencies": [
+    "d2242065-8e76-4bf6-ab0d-9cf942ba194f",
+    "1b030aad-be1b-4fd5-86db-ea4e08e77121"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "archi-lab.net",
+      "Version": "2021.25.17",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "3324fb844407478fb9a56569414f2aea",
+        "97e97248a8d14089bf8b49a4939b5977",
+        "91ad653a4eaa49a7b75b924f1605b4f4",
+        "e891c415319e4d52a71ba6831110dd5e"
+      ]
+    },
+    {
+      "Name": "Clockwork for Dynamo 1.x",
+      "Version": "1.34.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "ea7bde7c8f8a478ab83ff505f972e103"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.6.1.8786",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Print PDF",
+        "Id": "3324fb844407478fb9a56569414f2aea",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1241.2504810506339,
+        "Y": 455.02227835092765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String",
+        "Id": "feee35ceacaf41e29682b3d04adc6076",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 829.25048105063388,
+        "Y": 533.02227835092765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "View Sets",
+        "Id": "97e97248a8d14089bf8b49a4939b5977",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 571.25048105063388,
+        "Y": 233.02227835092765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Print Range",
+        "Id": "91ad653a4eaa49a7b75b924f1605b4f4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 829.25048105063388,
+        "Y": 342.02227835092765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "a216e61409fc470391094684199b1ff4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 571.25048105063388,
+        "Y": 833.02227835092765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "f9c36d0a581646e4a4573741db045479",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 829.25048105063388,
+        "Y": 833.02227835092765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "a6f7598d181a4bb2b3ac0f8e275bf545",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 829.25048105063388,
+        "Y": 724.02227835092765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "503fb0aaf8524a09b76f5555472e012a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 829.25048105063388,
+        "Y": 450.02227835092765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "b5b1eb04176c4d2da9a48143b14efbe3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 346.25048105063388,
+        "Y": 837.235611684261
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Print Settings",
+        "Id": "e891c415319e4d52a71ba6831110dd5e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 829.25048105063388,
+        "Y": 616.02227835092765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ViewSheetSet.Views",
+        "Id": "ea7bde7c8f8a478ab83ff505f972e103",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 829.25048105063388,
+        "Y": 233.02227835092765
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "4be637678968412fb844526f20dc173a",
+        "Title": "Print",
+        "Nodes": [
+          "3324fb844407478fb9a56569414f2aea",
+          "feee35ceacaf41e29682b3d04adc6076",
+          "97e97248a8d14089bf8b49a4939b5977",
+          "91ad653a4eaa49a7b75b924f1605b4f4",
+          "a216e61409fc470391094684199b1ff4",
+          "f9c36d0a581646e4a4573741db045479",
+          "a6f7598d181a4bb2b3ac0f8e275bf545",
+          "503fb0aaf8524a09b76f5555472e012a",
+          "e891c415319e4d52a71ba6831110dd5e",
+          "b5b1eb04176c4d2da9a48143b14efbe3",
+          "ea7bde7c8f8a478ab83ff505f972e103"
+        ],
+        "Left": 336.25048105063388,
+        "Top": 180.02227835092765,
+        "Width": 1144.0,
+        "Height": 750.21333333333337,
+        "FontSize": 36.0,
+        "InitialTop": 233.02227835092765,
+        "InitialHeight": 749.21333333333337,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -52.524944230637175,
+    "Y": -4.8235546092370214,
+    "Zoom": 0.752633033731266
+  }
+}
